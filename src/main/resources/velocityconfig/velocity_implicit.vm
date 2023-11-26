@@ -1,0 +1,6 @@
+#* @implicitly included *#
+#* @vtlvariable name="error" type="java.lang.String" *#
+#* @vtlvariable name="name" type="java.lang.String" *#
+#* @vtlvariable name="email" type="java.lang.String" *#
+#* @vtlvariable name="user" type="data.users.User" *#
+#* @vtlvariable name="subscription" type="data.subscriptions.Subscription" *#

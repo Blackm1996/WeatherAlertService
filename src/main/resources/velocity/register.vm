@@ -1,0 +1,19 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<form id="loginForm" method="post">
+    #if($error)
+        <p class="bad notification">$error</p>
+    #end
+
+    <h1>Add New User</h1>
+    <label>Name</label>
+    <input type="text" name="name" placeholder="enter your display name" value="$name" required>
+    <label>Email</label>
+    <input type="email" name="email" placeholder="enter your email" value="$email" pattern="/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/" required>
+    <label>Password</label>
+    <input type="password" name="password" placeholder="Enter Password" value="" required>
+    <label>Confirm Password</label>
+    <input type="password" name="confirmPass" placeholder="Confirm your passwords" value="" required>
+    <input type="submit" value="Add New User">
+</form>
+#end

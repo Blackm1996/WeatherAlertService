@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <!-- Appender for events.log, logging displaying all results from service, a stand in instead of actually sending notifications to clients -->
+    <appender name="ALERTS" class="ch.qos.logback.core.FileAppender">
+        <file>src/main/resources/logs/alerts.log</file>
+        <append>true</append>
+        <encoder>
+            <pattern>%d{HH:mm:ss} -%kvp- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender for errors.log to log all exceptions -->
+    <appender name="ERRORS" class="ch.qos.logback.core.FileAppender">
+        <file>src/main/resources/logs/errors.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss} -%kvp- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Console Debugging Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level -%kvp- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Appender for debugging proposes -->
+    <appender name="DEBUGGER" class="ch.qos.logback.core.FileAppender">
+        <file>src/main/resources/logs/debug.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss} -%kvp- %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Loggers -->
+    <logger name="alerts" level="INFO">
+        <appender-ref ref="ALERTS"/>
+    </logger>
+
+    <logger name="errors" level="ERROR">
+        <appender-ref ref="ERRORS"/>
+    </logger>
+
+    <logger name="personalDebugger" level="DEBUG">
+        <appender-ref ref="DEBUGGER"/>
+    </logger>
+
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
