@@ -4,3 +4,6 @@
 #* @vtlvariable name="email" type="java.lang.String" *#
 #* @vtlvariable name="user" type="data.users.User" *#
 #* @vtlvariable name="subscription" type="data.subscriptions.Subscription" *#
+#* @vtlvariable name="cities" type="java.util.Collection<data.cities.City>" *#
+#* @vtlvariable name="city" type="data.cities.City" *#
+#* @vtlvariable name="subscriptions" type="java.util.Map<java.lang.Integer,java.util.Map<java.lang.Integer,data.subscriptions.Subscription>>" *#

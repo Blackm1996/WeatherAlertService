@@ -7,6 +7,7 @@ public class CityAccess
     private static final HashMap<Integer, City> cities = new HashMap<>();
     public static void generateDataSet()
     {
+        cities.clear();
         cities.put(1, new City(1, "Abu Dhabi, UAE", 24.4539, 54.3773));
         cities.put(2, new City(2, "Al Ain, UAE", 24.1302, 55.8027));
         cities.put(3, new City(3, "Beirut, Lebanon", 33.8886, 35.4955));
@@ -47,6 +48,7 @@ public class CityAccess
         cities.put(38, new City(38, "Vancouver, Canada", 49.2827, -123.1207));
         cities.put(39, new City(39, "Yokohama, Japan", 35.4437, 139.6380));
         cities.put(40, new City(40, "Sydney, Australia", -33.8688, 151.2093));
+        cities.put(41, new City(41, "Unknown, Unknown", -363.8688, 151.2093));
     }
 
     public static City getCityById(int id)

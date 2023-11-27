@@ -1,9 +1,11 @@
-package weatherApp;
-
 import data.cities.CityAccess;
 import data.subscriptions.SubscriptionsAccess;
 import data.users.UsersAccess;
 import service.WeatherService;
+import weatherApp.IndexController;
+import weatherApp.SubscriptionController;
+import weatherApp.UserController;
+import weatherApp.VLEngine;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +14,9 @@ import static spark.Spark.*;
 
 import static logging.AppLogger.*;
 public class Main {
+
     public static void main(String[] args) {
 
-        //System.setProperty(ContextInitializer.CONFIG_FILE_PROPERTY, "logs/config/logback.xml");
         CityAccess.generateDataSet();
         int us= UsersAccess.generateInitial();
         if(us > 0)
@@ -25,7 +27,7 @@ public class Main {
         port(4567);
 
         before("*", ((request, response) -> {
-            logDebug("Request received "+request.pathInfo());
+            logDebug("Request received: "+request.pathInfo()+" methode: "+request.requestMethod());
             if (!request.pathInfo().endsWith("/")) {
                 response.redirect(request.pathInfo() + "/");
             }}));
@@ -40,6 +42,11 @@ public class Main {
         //register new user
         get("register/", UserController.renderRegisterPage);
         post("register/", UserController.registerUser);
+        //Subscription
+        get("subscription/", SubscriptionController.renderNewSubscriptionPage);
+        post("deleteSubscription/", SubscriptionController.removeSubscription);
+        post("subscription/", SubscriptionController.subscribe);
+        get("subscriptions/", SubscriptionController.renderAllSubscriptionsPage);
 
         get("*", (request, response) -> {
             Map<String, Object> model = new HashMap<>();
@@ -50,13 +57,15 @@ public class Main {
         // Create a scheduled executor service
         logDebug("starting weather service");
         try{
-            ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+            ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
             // Schedule a task to run periodically
-            // Fetch weather information for subscribed cities and notify users
-            scheduler.scheduleWithFixedDelay(service::ProcessWeather, 0, 10, TimeUnit.MINUTES); // Run every 10 minutes
+            // Run every 10 minutes since openweathermap's data is updated every 10 minutes
+            scheduler.scheduleWithFixedDelay(service::ProcessWeather, 0, 10, TimeUnit.MINUTES);
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 logDebug("Shutting down Weather Service...");
                 scheduler.shutdown();
+                service.getExecutorService().shutdown();
+                service.getEmailService().getEmailExecutor().shutdown();
             }));
         }
         catch (Exception e)

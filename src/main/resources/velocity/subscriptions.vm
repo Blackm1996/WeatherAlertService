@@ -1,0 +1,34 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+    #if($user)
+        <h1> List Of All Subscriptions </h1>
+        #if($subscriptions)
+            <table>
+            	<thead>
+            		<tr>
+            			<td>User name</td>
+            			<td>User Email</td>
+            			<td>Subscribed City</td>
+            			<td>Minimum Temperature</td>
+            			<td>Maximum Temperature</td>
+            		</tr>
+            	</thead>
+            	<tbody>
+            	    #foreach($citySubs in $subscriptions.values())
+            	        #foreach($subscription in $citySubs.values())
+            	            <tr>
+                                <td>$subscription.getUser().getName()</td>
+                                <td>$subscription.getUser().getEmail()</td>
+                                <td>$subscription.getCity().getName()</td>
+                                <td>$subscription.getMinTempCelsius()</td>
+                                <td>$subscription.getMaxTempCelsius()</td>
+                            </tr>
+            	        #end
+            	    #end
+            	</tbody>
+            </table>
+        #else
+            <h1> There is no Subscriptions </h1>
+        #end
+    #end
+#end

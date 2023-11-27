@@ -28,7 +28,7 @@ public class UserController
     };
     public static Route login = (Request request, Response response) ->
     {
-        logDebug("Entered login");
+        logDebug("Attempting login");
         int id = UsersAccess.authenticate(request.queryParams("email"), request.queryParams("password"));
         logDebug("user Authentication, id = "+id);
         Map<String, Object> model = new HashMap<>();
@@ -52,6 +52,7 @@ public class UserController
     public static Route logout = (Request request, Response response) ->
     {
         request.session().removeAttribute("loggedIn");
+        logDebug("user Logged out, redirecting to index");
         response.redirect("/index/");
         return null;
     };

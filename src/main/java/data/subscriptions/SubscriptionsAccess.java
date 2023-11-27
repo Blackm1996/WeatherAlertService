@@ -10,8 +10,19 @@ import java.util.Map;
 
 public class SubscriptionsAccess
 {
+    public static final int SUCCESSFUL = 1;
+    public static final int ALREADYSUB = 0;
+    public static final int ERROR = -1;
+
+    public static final int TEMPERROR = -2;
+
     private static final Map<Integer, Map<Integer, Subscription>> subscriptions=new HashMap<>();
 
+    //used in testing
+    public static void clearSubs()
+    {
+        subscriptions.clear();
+    }
     public static Map<Integer, Map<Integer, Subscription>> getSubscriptions()
     {
         return subscriptions;
@@ -26,8 +37,17 @@ public class SubscriptionsAccess
         return null;
     }
 
+    //only used for testing
+    public static void addSub(Subscription sub)
+    {
+        int cityId=sub.getCity().getId();
+        Map<Integer, Subscription> citySubs = subscriptions.computeIfAbsent(cityId, k -> new HashMap<>());
+        citySubs.put(sub.getUser().getId(),sub);
+    }
     public static int subscribe(int userId ,int cityId, int maxTemp, int minTemp)
     {
+        if(minTemp>maxTemp)
+            return TEMPERROR;
         User user = UsersAccess.getUserById(userId);
         City city = CityAccess.getCityById(cityId);
         if(city!=null && user!=null) {
@@ -36,11 +56,11 @@ public class SubscriptionsAccess
             {
                 Map<Integer, Subscription> citySubs = subscriptions.computeIfAbsent(cityId, k -> new HashMap<>());
                 citySubs.put(userId, new Subscription(user, city, maxTemp, minTemp));
-                return 1;
+                return SUCCESSFUL;
             }
-            return 0;
+            return ALREADYSUB;
         }
-        return -1;
+        return ERROR;
     }
 
     public static boolean unsubscribe(int userId)
@@ -55,10 +75,5 @@ public class SubscriptionsAccess
             return true;
         }
         return false;
-    }
-
-    public Map<Integer, Subscription> getCitySubscriptions(int cityId)
-    {
-        return subscriptions.get(cityId);
     }
 }

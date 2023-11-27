@@ -3,7 +3,7 @@
 
     <!-- Appender for events.log, logging displaying all results from service, a stand in instead of actually sending notifications to clients -->
     <appender name="ALERTS" class="ch.qos.logback.core.FileAppender">
-        <file>src/main/resources/logs/alerts.log</file>
+        <file>src/main/resources/logs/userAlerts.log</file>
         <append>true</append>
         <encoder>
             <pattern>%d{HH:mm:ss} -%kvp- %msg%n</pattern>

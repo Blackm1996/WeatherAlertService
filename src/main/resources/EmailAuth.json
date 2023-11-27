@@ -1,0 +1,7 @@
+{
+  "Email" : "",
+  "Password" : "",
+  "Host" : "smtp-mail.outlook.com",
+  "Port" : "587",
+  "Auth": "true"
+}

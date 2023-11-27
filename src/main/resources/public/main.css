@@ -118,50 +118,30 @@ nav ul, nav li {
     transform: translateY(0px);
 }
 
-/* Very basic grid */
-.row {
-    width: 100%;
-    overflow: auto;
+/* table */
+table {
+	border-collapse: collapse;
+    font-family: Tahoma, Geneva, sans-serif;
 }
-
-.row > * {
-    float: left;
+table td {
+	padding: 15px;
 }
-
-.row-2 .col {
-    width: 49%
+table thead td {
+	background-color: #ff7761;
+	color: #ffffff;
+	font-weight: bold;
+	font-size: 13px;
+	border: 1px solid #54585d;
 }
-
-.row-2 .col:nth-child(odd) {
-    margin: 0% 1% 0% 0%
+table tbody td {
+	color: #636363;
+	border: 1px solid #dddfe1;
 }
-
-.row-2 .col:nth-child(even) {
-    margin: 0% 0% 0% 1%
+table tbody tr {
+	background-color: #f9fafb;
 }
-
-.row-3 .col {
-    width: 32%
-}
-
-.row-3 .col:nth-child(3n+1) {
-    margin: 0% 1% 0% 0%
-}
-
-.row-3 .col:nth-child(3n+2) {
-    margin: 0% 1% 0% 1%
-}
-
-.row-3 .col:nth-child(3n+3) {
-    margin: 0% 0% 0% 1%
-}
-
-@media screen and (max-width: 550px) {
-    .row .col:nth-child(n) {
-        width: 100%;
-        margin-right: 0;
-        margin-left: 0;
-    }
+table tbody tr:nth-child(odd) {
+	background-color: #ffffff;
 }
 
 /* Login Form */
@@ -177,6 +157,14 @@ nav ul, nav li {
 }
 
 #loginForm input {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    width: 100%;
+    border-radius: 3px;
+    margin: 2px 0 20px 0;
+}
+
+#loginForm select {
     border: 1px solid #ddd;
     padding: 8px 12px;
     width: 100%;

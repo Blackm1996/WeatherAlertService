@@ -21,6 +21,7 @@
                         <button id="logout">Logout</button>
                     </form>
                 </li>
+                <li><a href="/subscriptions/">Show All Subscriptions</a></li>
             #else
                 <li><a href="/login/">Login</a></li>
             #end

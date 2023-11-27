@@ -1,0 +1,21 @@
+#parse("/velocity/layout.vm")
+#@mainLayout()
+<form id="loginForm" method="post">
+    #if($error)
+        <p class="bad notification">$error</p>
+    #end
+    <h1>Subscribe to a City</h1>
+    <input type="hidden" name="userId" value="$user.getId()">
+    <label>City</label>
+    <select name="cityId">
+        #foreach($city in $cities)
+            <option value = $city.getId()>$city.getName()</option>
+        #end
+    </select>
+    <label>Min Temperature</label>
+    <input type="number" name="minTemp" min="0" step="1" value="10" required/>
+    <label>Min Temperature</label>
+    <input type="number" name="maxTemp" min="0" step="1" value="35" required/>
+    <input type="submit" value="Subscribe">
+</form>
+#end

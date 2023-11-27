@@ -17,6 +17,7 @@ public class UsersAccess
     public static final int UNAUTHENTICATED = 0;
     public static int generateInitial()
     {
+        users.clear();
         //default user mohamad
         return addUser("mohamad", "mohamad_email@someProvider.com","@MyInitial20","@MyInitial20");
     }
@@ -73,9 +74,5 @@ public class UsersAccess
         String hashed =BCrypt.hashpw(password, user.getSalt());
 
         return hashed.equals(user.getPassword()) ? user.getId() : UNAUTHENTICATED;
-    }
-    public static User removeUser(int id)
-    {
-        return users.remove(id);
     }
 }

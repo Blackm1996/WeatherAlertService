@@ -1,36 +1,20 @@
 #parse("/velocity/layout.vm")
 #@mainLayout()
-   #* <h1>$msg.get("INDEX_HEADING")</h1>
-    <h2>$msg.get("INDEX_REGISTERED_USERS", $users.size())</h2>
-    <ul>
-        #foreach($user in $users)
-            <li>$user</li>
-        #end
-    </ul>
-    <p>$msg.get("INDEX_PASSWORD_INFO")</p>
-    #if($book)
-    <h2>$msg.get("INDEX_BOOK_OF_THE_DAY_TEXT")</h2>
-    <div class="row row-2">
-            <div class="col">
-                <a href="$WebPath.getBOOKS()$book.getIsbn()">$msg.get("INDEX_BOOK_OF_THE_DAY_LINK", $book.getTitle(), $book.getAuthor())</a>
-            </div>
-            <div class="col">
-                <img src="$book.getLargeCover()" alt="$book.getTitle()">
-            </div>
-        </div>
-    #end *#
-
     #if($user)
         <h1> Welcome $user.getName() </h1>
         #if($subscription)
             <h2> You are subscribed to receive Weather on $subscription.getCity().getName()</h2><br>
             <h3> Notification will be sent to your email $user.getEmail() if the Temperature exceeds $subscription.getMaxTempCelsius() degrees<br>
                  Or has gone below $subscription.getMinTempCelsius() degrees</h3><br>
-            <form method="delete" action="/subscription/$user.getId()"
-                <button id="logout">Logout</button>
+            <form method="post" action="/deleteSubscription/">
+                <input type="submit" value="Unsubscribe">
             </form>
         #else
-            <h2> You are not yet
+            #if($error)
+                <p class="bad notification">$error</p>
+            #end
+            <h2> You are not yet Subscribed to any City!</h2>
+            <a href="/subscription/">Subscribe now!</a>
         #end
     #else
         <h1> Welcome, you are not logged in, please Login or Register as a new User </h1>
