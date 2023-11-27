@@ -20,7 +20,7 @@ public class Main {
         CityAccess.generateDataSet();
         int us= UsersAccess.generateInitial();
         if(us > 0)
-            SubscriptionsAccess.subscribe(us,32,10,6);
+            SubscriptionsAccess.subscribe(us,32,10,6); //subscribe to low temp to always fire an alert
         initializeBackgroundService();
         staticFiles.location("/public");
         staticFiles.expireTime(600L);
