@@ -6,7 +6,7 @@ This app is for learning purposes only.
 
 ## Technologie
 
-This app uses [spark-java](https://sparkjava.com/) framework to create the web application, it also uses java's Executorservice and ScheduledExecutorService to create a service that will fetch all subscribed cities using [openweathermap](https://openweathermap.org/) public API, this service will run every 10 minutes.
+This app uses [spark-java](https://sparkjava.com/) framework to create the web application, it also uses java's Executorservice and ScheduledExecutorService to create a service that will fetch all subscribed cities's weather data using [openweathermap](https://openweathermap.org/) public API, this service will run every 10 minutes.
 
 
 ## Usage
